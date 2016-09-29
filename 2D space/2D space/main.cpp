@@ -1,25 +1,13 @@
-#include "SDL.h"
-#include <iostream>
+#include "window.h"
 
 int main(int argc, char* args[]) {
 
-	SDL_Window *window = nullptr;
+	Window window("SDL test", 899, 600);
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		std::cout << "Error video init Error!" << SDL_GetError() << std::endl;
+	while (window.isClosed() != true) {
+		window.pollEvents();
+		window.clear();
 	}
-	else {
-		window = SDL_CreateWindow("SpaceShooter", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_SHOWN);
-		if (window = NULL)
-			std::cout << "Window creation error: " << SDL_GetError() << std::endl;
-		else {
-			SDL_UpdateWindowSurface(window);
-			SDL_Delay(6000);
-		}
-	}
-
-	SDL_DestroyWindow(window);
-	SDL_Quit();
 
 	return 0;
 }
