@@ -1,3 +1,5 @@
-﻿  window.cpp
-  2D space.vcxproj -> C:\Users\Olltard\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.exe
-  2D space.vcxproj -> C:\Users\Olltard\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.pdb (Partial PDB)
+﻿  player.cpp
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\player.cpp(60): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\player.cpp(61): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+  2D space.vcxproj -> C:\Users\Filips\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.exe
+  2D space.vcxproj -> C:\Users\Filips\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.pdb (Partial PDB)

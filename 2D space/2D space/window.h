@@ -3,27 +3,31 @@
 
 #include <string>
 #include "SDL.h"
+
 class Window {
 public:
-	Window(const std::string &title, int width, int height);
-	~Window();
+	Window(const std::string &title, int width, int height); //Constructor som tar title width och height
+	~Window(); //Destructor
 
-	void pollEvents();
-	void clear() const;
+	void pollEvents(); //Letar efter events tex att krysset trycks in
+	void clear() const; //ritar ut saker på skärmen så som bakgrund 
+						//DETTA SKALL BARA HA BAKGRUNDEN FÖR SPELET INGET ANNAT
 
-	inline bool isClosed() const { return _closed; }
+	inline bool isClosed() const { return _closed; } //returnerar att fönstret är stängt 
+
+public:
+	SDL_Window *_window = nullptr;
+	SDL_Renderer *_renderer = nullptr;
 
 private:
 	bool init(); //Här ska jag initera window
 
 private:
-	std::string _title;
-	int _width = 800;
-	int _height = 600;
+	std::string _title; //String title of window
+	int _width = 800; //Width of the window
+	int _height = 600; //Height of the window
 
 	bool _closed = false;
-
-	SDL_Window *_window = nullptr;
-	SDL_Renderer *_renderer = nullptr;
 };
+
 #endif // !INCLUDED_WINDOW

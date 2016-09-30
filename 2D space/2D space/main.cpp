@@ -1,12 +1,12 @@
-#include "window.h"
+#include "game.h"
 
 int main(int argc, char* args[]) {
 
-	Window window("SDL test", 899, 600);
+	Game::instance()->init("Space Invaders ala Olltard", 600, 600); // Skapar fönstret
 
-	while (window.isClosed() != true) {
-		window.pollEvents();
-		window.clear();
+	while (Game::instance()->isRunning()) { //Whileloop som körs så länge fönstret är öppet
+		Game::instance()->update(); // Uppdaterar allt
+		Game::instance()->render(); // renderar allt
 	}
 
 	return 0;
