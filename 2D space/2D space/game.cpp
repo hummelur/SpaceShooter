@@ -1,5 +1,7 @@
 #include "game.h"
 #include "player.h"
+#include "Bullet.h"
+#include "BulletHandler.h"
 
 Game * Game::sm_instance = new Game();
 
@@ -38,13 +40,17 @@ bool Game::init(const char* title, int w, int h) {
 	// Sätter att programmet körs till true
 	m_running = true;
 
+	//Sätter spelarens startposition
+	player.setPosY(m_heightWin - 100);
+	player.setPosX((m_widthWin / 2) - player.getWidth());
+
 	return true;
 }
 
 void Game::update() {
 	// Uppdaterar spelaren
 	player.update();
-
+	BulletHandler::instance()->update();
 	// Kör eventhandlern
 	eventHandler(player);
 }
@@ -56,8 +62,9 @@ void Game::render() {
 	SDL_RenderClear(m_renderer);
 
 	// HÄR IMELLAN SKA ALLT RENDERAS
+	BulletHandler::instance()->draw();
 	player.draw();
-
+	
 	// Pressenterar det till fönstret
 	SDL_RenderPresent(m_renderer);
 }
@@ -76,6 +83,13 @@ void Game::eventHandler(Player &player) {
 				break;
 			default:
 				break;
+		}
+		switch (event.key.keysym.sym) {
+		case SDLK_ESCAPE:
+			m_running = false;
+			break;
+		default:
+			break;
 		}
 	}	
 }

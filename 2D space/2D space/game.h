@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "player.h"
+#include "BulletHandler.h"
 
 class Game {
 public:
@@ -15,7 +16,7 @@ public:
 	void eventHandler(Player &player);
 	inline bool isRunning()const { return m_running; }
 
-	//get 
+	// Get 
 	SDL_Window* getWindow() const { return m_window; }
 	SDL_Renderer* getRenderer() const { return m_renderer; }
 	inline int getWindowWidth() const { return m_widthWin; }
