@@ -119,18 +119,26 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletHandler.cpp" />
+    <ClCompile Include="CollisionHandler.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyHandler.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="random.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletHandler.h" />
+    <ClInclude Include="CollisionHandler.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyHandler.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

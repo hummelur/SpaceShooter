@@ -15,8 +15,12 @@ public:
 	virtual void draw() const;
 	virtual void update();
 	virtual Vector2D getPos() const;
+	
+	// Events
 	void movement(int speed, int dir);
 	void eventHandler(SDL_Event &event);
+	
+	//Set and gets
 	void setPosY(int posy);
 	void setPosX(int posx);
 	void setWidth(int width);
@@ -24,7 +28,8 @@ public:
 	inline int getWidth() const { return _width; }
 	inline int getHeight() const { return _height; }
 	
-
+	// Timer
+	bool timer();
 
 private:
 	int _width = 25;
@@ -36,6 +41,17 @@ private:
 
 	float _posx;
 	float _posy;
+
+	int _time = 130;
+	bool _timerunning = false;
+
+	// Keystates
+	const Uint8* keyStates;
+	
+	// Movement bools
+	bool _left = false;
+	bool _right = false;
+	bool _fireing = false;
 
 	static Player * sm_instance;
 };

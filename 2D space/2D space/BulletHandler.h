@@ -17,12 +17,11 @@ public:
 	void delBullet();
 	void draw();
 	void update();
-	
+
 	typedef std::vector<GameObject*> bullets;
 	bullets m_bullets;
 
 private:
-	float posx;
 	static BulletHandler * sm_instance;
 
 };

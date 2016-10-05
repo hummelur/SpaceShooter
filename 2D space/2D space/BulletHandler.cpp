@@ -1,4 +1,5 @@
 #include "BulletHandler.h"
+#include <windows.h>
 
 BulletHandler * BulletHandler::sm_instance = new BulletHandler();
 
@@ -6,7 +7,6 @@ BulletHandler::BulletHandler(){
 }
 
 BulletHandler::~BulletHandler() {
-
 	// Tarbort bullets
 	m_bullets.clear();
 	
@@ -26,7 +26,8 @@ void BulletHandler::delBullet() {
 
 	// Loopar igenom vectorn för att hitta de som är utanför banan
 	for (it = m_bullets.begin(); it != m_bullets.end();) {
-		if ((*it)->getPos().y < 200) {
+		if ((*it)->getPos().y < 10) {
+			// Tarbort bullet
 			delete * it;
 			it = m_bullets.erase(it);
 		} else {
@@ -53,3 +54,4 @@ void BulletHandler::update() {
 	//HÄR
 	delBullet();
 }
+

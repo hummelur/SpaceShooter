@@ -28,14 +28,12 @@ void Bullet::draw() const {
 	rect.h = _height;
 	rect.x = _pos.x;
 	rect.y = _pos.y;
-	
+
 	SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 255, 255, 200, 10); // Sätter färgen för recten
 	SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);				  // Applicerar färgen till rectanglen
 
 }
 
 void Bullet::update() {
-	if (_pos.y > 200) {
-		_pos.y -= _speed;
-	}
+	_pos.y -= _speed;
 }
