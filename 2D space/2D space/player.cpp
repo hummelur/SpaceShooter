@@ -13,6 +13,8 @@ Player::Player() :
 	_width = 25;
 	_height = 25;
 	_speed = 5;
+
+	keyStates = SDL_GetKeyboardState(0);
 }
 
 Player::~Player() {
@@ -57,7 +59,35 @@ void Player::movement( int speed, int dir ) {
 }
 
 void Player::update() {
+	
+	// Timer
+	if (_timerunning == true) {
+		// Om klassen retunerar true så ställs 
+		//_timerunning till false och spelaren kan skjuta igen
+		if (timer()) {
+			_time = 130;
+			_timerunning = false;
+		} else {
+			_timerunning = true;
+		}
+	}
 
+
+	// Movement and fireing 
+	if (_left) {
+		if(_pos.x > 0)
+			movement(-_speed, 1);
+	} 
+	if (_right) {
+		if(Game::instance()->getWindowWidth() - _width > _pos.x)
+			movement(_speed, 2);
+	}
+	if (_fireing) {
+		if (_timerunning == false) {
+			BulletHandler::instance()->addBullet(new Bullet(_pos));
+			_timerunning = true;
+		}
+	}
 }
 
 //Ritar ut spelarens rect (Ska vara en sprite senare)
@@ -78,22 +108,47 @@ void Player::draw() const {
 }
 
 void Player::eventHandler(SDL_Event &event) {
-	// Kollar efter knapptryckningar
-	if (event.type == SDL_KEYDOWN) {
-		switch (event.key.keysym.sym) {
-			case SDLK_LEFT:
-				movement(-_speed, 1);
-				break;
-			case SDLK_RIGHT:
-				movement(_speed, 2);
-				break;
-			default:
-				break;
+
+
+	if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+	{
+		keyStates = SDL_GetKeyboardState(0);
+	}
+
+	if (keyStates != 0)
+	{
+		if (keyStates[SDL_SCANCODE_SPACE] == 1)
+		{
+			_fireing = true;
+		} else {
+			_fireing = false;
+		}
+		if (keyStates[SDL_SCANCODE_RIGHT] == 1 || keyStates[SDL_SCANCODE_D] == 1)
+		{
+			_right = true;
+		} else {
+			_right = false;
 		}
 
-		if (event.key.keysym.sym == SDLK_SPACE) {
-			//avfyra vapen
-			BulletHandler::instance()->addBullet(new Bullet(_pos));
+		if (keyStates[SDL_SCANCODE_LEFT] == 1 || keyStates[SDL_SCANCODE_A] == 1)
+		{
+			_left = true;
+		}else {
+			_left = false;
 		}
 	}
+}
+
+bool Player::timer() {
+	// Räknar ner 
+	_time -= 10;
+	
+	// Kollar om time är mindre än noll
+	// Om den är de retuneras true
+	if (_time < 0) {
+		return true;
+	} else {
+		return false;
+	}
+	
 }

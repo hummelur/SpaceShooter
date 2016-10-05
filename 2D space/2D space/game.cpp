@@ -2,13 +2,14 @@
 #include "player.h"
 #include "Bullet.h"
 #include "BulletHandler.h"
+#include "EnemyHandler.h"
 
 Game * Game::sm_instance = new Game();
 
 Game::Game():
 	m_widthWin(0),
 	m_heightWin(0),
-	m_running(false){	
+	m_running(false){
 }
 Game::~Game(){}
 
@@ -44,6 +45,11 @@ bool Game::init(const char* title, int w, int h) {
 	player.setPosY(m_heightWin - 100);
 	player.setPosX((m_widthWin / 2) - player.getWidth());
 
+	//Skapa 20 enemys
+	for (int i = 0; i < 20; i++) {
+		EnemyHandler::instance()->addEnemy(new Enemy(400));
+	}
+
 	return true;
 }
 
@@ -51,6 +57,8 @@ void Game::update() {
 	// Uppdaterar spelaren
 	player.update();
 	BulletHandler::instance()->update();
+	EnemyHandler::instance()->update();
+
 	// Kör eventhandlern
 	eventHandler(player);
 }
@@ -63,6 +71,7 @@ void Game::render() {
 
 	// HÄR IMELLAN SKA ALLT RENDERAS
 	BulletHandler::instance()->draw();
+	EnemyHandler::instance()->draw();
 	player.draw();
 	
 	// Pressenterar det till fönstret
@@ -72,8 +81,11 @@ void Game::render() {
 void Game::eventHandler(Player &player) {
 	// Skapar ett event för att kunna köra ett poll event endast
 	SDL_Event event;
+	
+
+
 	if (SDL_PollEvent(&event)) {
-		//Spelarens events
+	
 		player.eventHandler(event);
 
 		switch (event.type)

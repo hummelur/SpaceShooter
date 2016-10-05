@@ -1,3 +1,11 @@
+<<<<<<< HEAD
 ﻿  BulletHandler.cpp
   2D space.vcxproj -> C:\Users\Filips\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.exe
   2D space.vcxproj -> C:\Users\Filips\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.pdb (Partial PDB)
+=======
+﻿  Bullet.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\bullet.cpp(29): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\bullet.cpp(30): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+  2D space.vcxproj -> C:\Users\Olltard\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.exe
+  2D space.vcxproj -> C:\Users\Olltard\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.pdb (Partial PDB)
+>>>>>>> e3fa1b303d2b75aa8c3e88c7d896aaf91b4a9ac9
