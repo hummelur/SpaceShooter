@@ -2,6 +2,7 @@
 #define INCLUDED_GAME
 
 #include "SDL.h"
+#include "SDL_image.h"
 #include "player.h"
 #include "BulletHandler.h"
 #include "CollisionHandler.h"
