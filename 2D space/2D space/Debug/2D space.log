@@ -1,5 +1,17 @@
-﻿  Bullet.cpp
-c:\users\olltard\documents\github\spaceshooter\2d space\2d space\bullet.cpp(29): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
-c:\users\olltard\documents\github\spaceshooter\2d space\2d space\bullet.cpp(30): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
-  2D space.vcxproj -> C:\Users\Olltard\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.exe
-  2D space.vcxproj -> C:\Users\Olltard\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.pdb (Partial PDB)
+﻿  player.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  main.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  game.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  EnemyHandler.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  Enemy.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  CollisionHandler.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  BulletHandler.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  Bullet.cpp
+c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+  Generating Code...

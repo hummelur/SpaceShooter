@@ -19,8 +19,8 @@ public:
 private:
 	Vector2D _pos;
 	int _speed;
-	int _width;
-	int _height;
+	int _width = 45;
+	int _height = 45;
 	float _startPosX; // Denna ska vara random
 };
 #endif // !INCLUDED_ENEMY

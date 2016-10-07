@@ -46,6 +46,9 @@ void BulletHandler::draw() {
 }
 
 void BulletHandler::update() {
+	
+	collisionHandlerBullet(EnemyHandler::instance()->m_enemys);
+
 	//uppdaterar positionen för alla föremål i vectorn
 	for (auto &bullets : m_bullets) {
 		bullets->update();
@@ -54,4 +57,35 @@ void BulletHandler::update() {
 	//HÄR
 	delBullet();
 }
+
+void BulletHandler::collisionHandlerBullet(std::vector<GameObject*> &enemys) {
+	bool deleteBullet = false;
+	std::vector<GameObject*>::const_iterator it;
+	std::vector<GameObject*>::const_iterator ite;
+
+	//Loopar igenom båda arraysen
+	for (it = m_bullets.begin(); it != m_bullets.end();) {
+		for (ite = enemys.begin(); ite != enemys.end();) {
+			//kolla om de kolliderar
+ 			if (CollisionHandler::instance()->Collision((*ite)->getPos(), (*ite)->getWidth(), (*ite)->getHeight(),
+				(*it)->getPos(), (*it)->getWidth(), (*it)->getHeight())) {
+				delete * ite;
+				ite = enemys.erase(ite);
+				deleteBullet = true;
+			} else {
+				ite++;
+			}
+		}
+		// Om de kolliderade skall bulleten också tas bort 
+		if (deleteBullet) {
+			delete * it;
+			it = m_bullets.erase(it);
+			deleteBullet = false;
+		} else {
+			it++;
+		}
+	}
+
+}
+
 

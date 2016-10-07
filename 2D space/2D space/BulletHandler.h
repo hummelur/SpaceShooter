@@ -5,6 +5,9 @@
 #include "Bullet.h"
 #include "GameObject.h"
 #include "game.h"
+#include "EnemyHandler.h"
+#include "Enemy.h"
+#include "CollisionHandler.h"
 
 class BulletHandler {
 public:
@@ -17,6 +20,7 @@ public:
 	void delBullet();
 	void draw();
 	void update();
+	void collisionHandlerBullet(std::vector<GameObject*> &enemys);
 
 	typedef std::vector<GameObject*> bullets;
 	bullets m_bullets;
