@@ -1,11 +1,10 @@
 #include "Enemy.h"
 #include "player.h"
-#include "random.h"
 
 Enemy::Enemy(float posx) :
 	_pos(posx, -30), // Kör random x position
-	_width(35),
-	_height(35),
+	_width(45),
+	_height(45),
 	_speed(3){
 	
 }

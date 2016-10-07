@@ -1,24 +1,29 @@
 #ifndef INCLUDED_ENEMYHANDLER
-#define INLCUDED_ENEMYHANDLER
+#define INCLUDED_ENEMYHANDLER
 
-#include "Enemy.h"
 #include "GameObject.h"
+#include "Enemy.h"
+#include "random.h"
 #include <vector>
+
 class EnemyHandler {
 public:
 	static EnemyHandler * instance();
-
-	EnemyHandler();
-	~EnemyHandler();
-
+	
 	void addEnemy(GameObject *enemy);
 	void delEnemy();
 	void draw();
 	void update();
-	
-private:
+
 	typedef std::vector<GameObject*> Enemys;
-	Enemys _enemys;
+	Enemys m_enemys;
+
+private:
+	EnemyHandler();
+	~EnemyHandler();
+	bool timer();
+	int _time = 360;
+
 	static EnemyHandler * sm_instance;
 };
 #endif // !INCLUDED_ENEMYHANDLER

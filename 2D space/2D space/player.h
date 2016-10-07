@@ -51,6 +51,8 @@ private:
 	// Movement bools
 	bool _left = false;
 	bool _right = false;
+	bool _up = false;
+	bool _down = false;
 	bool _fireing = false;
 
 	static Player * sm_instance;

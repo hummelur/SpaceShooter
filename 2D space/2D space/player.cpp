@@ -51,7 +51,7 @@ void Player::movement( int speed, int dir ) {
 			_pos.x = _pos.x + speed;
 			break;
 		case 2: // Höger
-			_pos.x = _pos.x + speed;
+			_pos.y = _pos.y + speed;
 			break;
 		default:
 			break;
@@ -65,8 +65,8 @@ void Player::update() {
 		// Om klassen retunerar true så ställs 
 		//_timerunning till false och spelaren kan skjuta igen
 		if (timer()) {
-			_time = 130;
 			_timerunning = false;
+			_time = 130;
 		} else {
 			_timerunning = true;
 		}
@@ -80,6 +80,14 @@ void Player::update() {
 	} 
 	if (_right) {
 		if(Game::instance()->getWindowWidth() - _width > _pos.x)
+			movement(_speed, 1);
+	}
+	if (_up) {
+		if (0 < _pos.y)
+			movement(-_speed, 2);
+	}
+	if (_down) {
+		if(Game::instance()->getWindowHeight() > _pos.y + _height)
 			movement(_speed, 2);
 	}
 	if (_fireing) {
@@ -136,6 +144,23 @@ void Player::eventHandler(SDL_Event &event) {
 		}else {
 			_left = false;
 		}
+
+		if (keyStates[SDL_SCANCODE_UP] == 1 || keyStates[SDL_SCANCODE_W] == 1)
+		{
+			_up = true;
+		}
+		else {
+			_up = false;
+		}
+
+		if (keyStates[SDL_SCANCODE_DOWN] == 1 || keyStates[SDL_SCANCODE_S] == 1)
+		{
+			_down = true;
+		}
+		else {
+			_down = false;
+		}
+
 	}
 }
 
@@ -145,7 +170,7 @@ bool Player::timer() {
 	
 	// Kollar om time är mindre än noll
 	// Om den är de retuneras true
-	if (_time < 0) {
+	if (_time <= 0) {
 		return true;
 	} else {
 		return false;

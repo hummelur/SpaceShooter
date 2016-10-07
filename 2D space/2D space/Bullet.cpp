@@ -2,6 +2,8 @@
 #include "game.h"
 #include "player.h"
 
+Bullet * Bullet::sm_instance = new Bullet();
+
 Bullet::Bullet(){}
 
 Bullet::Bullet(const Vector2D pos) :
@@ -13,6 +15,11 @@ Bullet::Bullet(const Vector2D pos) :
 }
 
 Bullet::~Bullet(){
+	
+}
+
+Bullet * Bullet::instance() {
+	return sm_instance;
 }
 
 Vector2D Bullet::getPos() const {
@@ -36,4 +43,12 @@ void Bullet::draw() const {
 
 void Bullet::update() {
 	_pos.y -= _speed;
+}
+
+int Bullet::getHeight() const {
+	return _height;
+}
+
+int Bullet::getWidth() const {
+	return _width;
 }

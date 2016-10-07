@@ -8,7 +8,7 @@ public:
 	static Random * instance();
 	Random();
 	~Random();
-	float getRandom(float x, float xt);
+	float getRandom(int x, int xt);
 private:
 	static Random * sm_instance;
 };
