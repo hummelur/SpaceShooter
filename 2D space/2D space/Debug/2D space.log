@@ -1,17 +1,43 @@
+<<<<<<< HEAD
 ﻿  player.cpp
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+=======
+﻿  Bullet.cpp
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\bullet.cpp(36): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\bullet.cpp(37): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  player.cpp
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\player.cpp(28): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\player.cpp(32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\player.cpp(110): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\player.cpp(111): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+>>>>>>> 6d5c797bd8a8423f9a96297c693e7d507cb4162b
   main.cpp
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
   game.cpp
+<<<<<<< HEAD
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
   EnemyHandler.cpp
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
   Enemy.cpp
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
+=======
+  EnemyHandler.cpp
+  Enemy.cpp
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\enemy.cpp(22): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+c:\users\filips\documents\github\spaceshooter\2d space\2d space\enemy.cpp(23): warning C4244: '=': conversion from 'const float' to 'int', possible loss of data
+>>>>>>> 6d5c797bd8a8423f9a96297c693e7d507cb4162b
   CollisionHandler.cpp
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
   BulletHandler.cpp
+<<<<<<< HEAD
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
   Bullet.cpp
 c:\users\olltard\documents\github\spaceshooter\2d space\2d space\game.h(5): fatal error C1083: Cannot open include file: 'SDL2_image.h': No such file or directory
   Generating Code...
+=======
+  Generating Code...
+  2D space.vcxproj -> C:\Users\Filips\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.exe
+  2D space.vcxproj -> C:\Users\Filips\Documents\GitHub\SpaceShooter\2D space\Debug\2D space.pdb (Partial PDB)
+>>>>>>> 6d5c797bd8a8423f9a96297c693e7d507cb4162b
