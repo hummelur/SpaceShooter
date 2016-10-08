@@ -21,6 +21,8 @@ Enemy::Enemy(float posx) :
 }
 
 Enemy::~Enemy() {
+	SDL_DestroyTexture(_texture);
+	IMG_Quit();
 }
 
 void Enemy::update() {

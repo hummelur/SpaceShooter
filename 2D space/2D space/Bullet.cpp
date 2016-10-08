@@ -13,22 +13,30 @@ Bullet::Bullet(const Vector2D pos) :
 	_height(40) {
 	_pos.x = _pos.x + (Player::instance()->getWidth() / 2) - (_width / 2);
 	
+	// Laddar in bilden 
+	// (Kanske ska ändra detta så man bara laddar in bilden en gång istället för många gånger)
 	auto surface = IMG_Load("images/bullet.png");
 	
+	// Kollar om de gick att ladda filen
 	if (!surface) {
 		printf(IMG_GetError());
 	}
 
+	// Lägger in bilden till texturen 
 	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
 
+	// Kollar om texturen skapades på rätt sätt 
 	if (!_texture) {
 		printf("Failed to create texture");
 	}
+
+	// Frigör ytan
 	SDL_FreeSurface(surface);
 }
 
 Bullet::~Bullet(){
-	
+	SDL_DestroyTexture(_texture);
+	IMG_Quit();
 }
 
 Bullet * Bullet::instance() {

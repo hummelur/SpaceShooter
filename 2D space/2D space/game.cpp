@@ -8,7 +8,11 @@ Game::Game():
 	m_heightWin(0),
 	m_running(false){
 }
-Game::~Game(){}
+Game::~Game(){
+	SDL_DestroyRenderer(m_renderer);
+	SDL_DestroyWindow(m_window);
+	SDL_Quit();
+}
 
 Game * Game::instance() {
 	return sm_instance;
