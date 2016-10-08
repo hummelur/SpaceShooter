@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "SDL.h"
+#include "SDL_image.h"
 #include "Vector2D.h"
 #include "player.h"
 #include <vector>
@@ -26,8 +27,10 @@ private:
 	float _posx;
 	float _posy;
 	int _speed;
-	int _width = 10;
-	int _height = 10;
+	int _width = 20;
+	int _height = 20;
+
+	SDL_Texture *_texture;
 
 	static Bullet * sm_instance;
 };

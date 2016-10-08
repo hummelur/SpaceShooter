@@ -7,11 +7,24 @@ Bullet * Bullet::sm_instance = new Bullet();
 Bullet::Bullet(){}
 
 Bullet::Bullet(const Vector2D pos) :
-	_width(10),
+	_width(40),
 	_pos(pos),
-	_speed(7),
-	_height(10) {
+	_speed(14),
+	_height(40) {
 	_pos.x = _pos.x + (Player::instance()->getWidth() / 2) - (_width / 2);
+	
+	auto surface = IMG_Load("images/bullet.png");
+	
+	if (!surface) {
+		printf(IMG_GetError());
+	}
+
+	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
+
+	if (!_texture) {
+		printf("Failed to create texture");
+	}
+	SDL_FreeSurface(surface);
 }
 
 Bullet::~Bullet(){
@@ -36,9 +49,13 @@ void Bullet::draw() const {
 	rect.x = _pos.x;
 	rect.y = _pos.y;
 
-	SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 255, 255, 200, 10); // Sätter färgen för recten
-	SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);				  // Applicerar färgen till rectanglen
+	if (_texture) {
+		SDL_RenderCopy(Game::instance()->getRenderer(), _texture, nullptr, &rect);
+	} else {
+		SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 255, 255, 200, 10); // Sätter färgen för recten
+		SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);				  // Applicerar färgen till rectanglen
 
+	}
 }
 
 void Bullet::update() {

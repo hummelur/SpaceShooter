@@ -19,6 +19,10 @@ bool Game::init(const char* title, int w, int h) {
 	//Inits sdl video
 	SDL_Init(SDL_INIT_VIDEO);
 
+	if (IMG_Init(IMG_INIT_PNG) != 2) {
+		printf(IMG_GetError());
+	}
+
 	//sets the playingfield width and height
 	m_widthWin = w;
 	m_heightWin = h;
@@ -39,28 +43,21 @@ bool Game::init(const char* title, int w, int h) {
 	m_running = true;
 
 	//Sätter spelarens startposition
-	player.setPosY(m_heightWin - 100);
-	player.setPosX((m_widthWin / 2) - player.getWidth());
-
-	int i = 0;
-	while (i < 5)
-	{
-		EnemyHandler::instance()->addEnemy(new Enemy(Random::instance()->getRandom(10, 400)));
-		i++;
-
-	}
+	Player::instance()->setTexture();
+	Player::instance()->setPosY(m_heightWin - 100);
+	Player::instance()->setPosX((m_widthWin / 2) - Player::instance()->getWidth());
 
 	return true;
 }
 
 void Game::update() {
 	// Uppdaterar spelaren
-	player.update();
+	Player::instance()->update();
 	BulletHandler::instance()->update();
 	EnemyHandler::instance()->update();
 
 	// Kör eventhandlern
-	eventHandler(player);
+	eventHandler();
 }
 
 void Game::render() {
@@ -72,19 +69,19 @@ void Game::render() {
 	// HÄR IMELLAN SKA ALLT RENDERAS
 	BulletHandler::instance()->draw();
 	EnemyHandler::instance()->draw();
-	player.draw();
+	Player::instance()->draw();
 	
 	// Pressenterar det till fönstret
 	SDL_RenderPresent(m_renderer);
 }
 
-void Game::eventHandler(Player &player) {
+void Game::eventHandler() {
 	// Skapar ett event för att kunna köra ett poll event endast
 	SDL_Event event;
 	
 	if (SDL_PollEvent(&event)) {
 	
-		player.eventHandler(event);
+		Player::instance()->eventHandler(event);
 
 		switch (event.type)
 		{

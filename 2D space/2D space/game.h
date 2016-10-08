@@ -14,10 +14,9 @@ public:
 
 	static Game * instance(); // Gör en instance av game för att kunna kalla functioner 
 
-	void update();
 	bool init(const char* title, int w, int h);
-	void render();
-	void eventHandler(Player &player);
+	
+	void eventHandler();
 	inline bool isRunning()const { return m_running; }
 
 	// Get 
@@ -25,6 +24,10 @@ public:
 	SDL_Renderer* getRenderer() const { return m_renderer; }
 	inline int getWindowWidth() const { return m_widthWin; }
 	inline int getWindowHeight() const { return m_heightWin; }
+	
+	void render();
+	void update();
+
 
 private:
 	Game();
@@ -35,8 +38,6 @@ private:
 
 	SDL_Window *m_window;
 	SDL_Renderer *m_renderer;
-
-	Player player;
 
 	static Game * sm_instance;
 };

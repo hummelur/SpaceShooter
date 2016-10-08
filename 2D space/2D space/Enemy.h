@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Vector2D.h"
 #include "SDL.h"
+#include "SDL_image.h"
 #include "game.h"
 
 class Enemy : public GameObject {
@@ -22,5 +23,7 @@ private:
 	int _width;
 	int _height;
 	float _startPosX; // Denna ska vara random
+
+	SDL_Texture *_texture;
 };
 #endif // !INCLUDED_ENEMY

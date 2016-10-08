@@ -3,6 +3,7 @@
 
 #include "GameObject.h"
 #include "SDL.h"
+#include "SDL_image.h"
 #include "Vector2D.h"
 
 class Player : public GameObject {
@@ -25,6 +26,7 @@ public:
 	void setPosX(int posx);
 	void setWidth(int width);
 	void setHeight(int height);
+	void setTexture();
 	inline int getWidth() const { return _width; }
 	inline int getHeight() const { return _height; }
 	
@@ -32,8 +34,8 @@ public:
 	bool timer();
 
 private:
-	int _width = 25;
-	int _height = 25;
+	int _width = 50;
+	int _height = 50;
 	int _dir = 1;
 	int _speed = 5;
 
@@ -54,6 +56,9 @@ private:
 	bool _up = false;
 	bool _down = false;
 	bool _fireing = false;
+
+	//Texture
+	SDL_Texture *_texture;
 
 	static Player * sm_instance;
 };

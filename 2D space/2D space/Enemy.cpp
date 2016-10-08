@@ -6,7 +6,18 @@ Enemy::Enemy(float posx) :
 	_width(45),
 	_height(45),
 	_speed(3){
-	
+	auto surface = IMG_Load("images/enemy.png");
+
+	if (!surface) {
+		printf(IMG_GetError());
+	}
+
+	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
+
+	if (!_texture) {
+		printf("Failed to create texture");
+	}
+	SDL_FreeSurface(surface);
 }
 
 Enemy::~Enemy() {
@@ -24,8 +35,14 @@ void Enemy::draw() const {
 	rect.w = _width;
 	rect.h = _height;
 
-	SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 100, 255, 100, 255);
-	SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);
+	if (_texture) {
+		SDL_RenderCopy(Game::instance()->getRenderer(), _texture, nullptr, &rect);
+	}
+	else {
+		SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 255, 255, 200, 10); // Sätter färgen för recten
+		SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);				  // Applicerar färgen till rectanglen
+
+	}
 }
 
 Vector2D Enemy::getPos() const {

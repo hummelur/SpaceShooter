@@ -9,12 +9,9 @@ Player::Player() :
 	_posx(100),
 	_posy(500),
 	_pos(_posx, _posy){
-	
-	_width = 25;
-	_height = 25;
-	_speed = 5;
-
+	_speed = 6;
 	keyStates = SDL_GetKeyboardState(0);
+
 }
 
 Player::~Player() {
@@ -38,6 +35,21 @@ void Player::setWidth(int width) {
 
 void Player::setHeight(int height) {
 	_height = height;
+}
+
+void Player::setTexture() {
+	auto surface = IMG_Load("images/player.png");
+
+	if (!surface) {
+		printf(IMG_GetError());
+	}
+
+	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
+
+	if (!_texture) {
+		printf("Failed to create texture");
+	}
+	SDL_FreeSurface(surface);
 }
 
 Vector2D Player::getPos() const {
@@ -109,9 +121,14 @@ void Player::draw() const {
 	rect.h = _height;
 	rect.x = _pos.x;
 	rect.y = _pos.y;
+	if (_texture) {
+		SDL_RenderCopy(Game::instance()->getRenderer(), _texture, nullptr, &rect);
+	}
+	else {
+		SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 255, 255, 200, 10); // Sätter färgen för recten
+		SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);				  // Applicerar färgen till rectanglen
 
-	SDL_SetRenderDrawColor(Game::instance()->getRenderer(), 150, 0, 210, 10); // Sätter färgen för recten
-	SDL_RenderFillRect(Game::instance()->getRenderer(), &rect);				  // Applicerar färgen till rectanglen
+	}
 	
 }
 
