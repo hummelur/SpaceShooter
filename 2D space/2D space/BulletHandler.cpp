@@ -69,6 +69,7 @@ void BulletHandler::collisionHandlerBullet(std::vector<GameObject*> &enemys) {
 			//kolla om de kolliderar
  			if (CollisionHandler::instance()->Collision((*ite)->getPos(), (*ite)->getWidth(), (*ite)->getHeight(),
 				(*it)->getPos(), (*it)->getWidth(), (*it)->getHeight())) {
+				Player::instance()->givePoints(10);
 				delete * ite;
 				ite = enemys.erase(ite);
 				deleteBullet = true;

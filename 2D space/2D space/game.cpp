@@ -23,8 +23,14 @@ bool Game::init(const char* title, int w, int h) {
 	//Inits sdl video
 	SDL_Init(SDL_INIT_VIDEO);
 
+	// Inits SDL image
 	if (IMG_Init(IMG_INIT_PNG) != 2) {
 		printf(IMG_GetError());
+	}
+
+	// Inits SDL ttf (text)
+	if (!TTF_Init()) {
+		printf(TTF_GetError());
 	}
 
 	//sets the playingfield width and height
@@ -40,16 +46,22 @@ bool Game::init(const char* title, int w, int h) {
 		0
 	);
 
+	//Gör skärmen för att rendera text
+	m_screen = SDL_GetWindowSurface(m_window);
+
 	// Sätter upp en renderer
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_PRESENTVSYNC);
 	
 	// Sätter att programmet körs till true
 	m_running = true;
 
-	//Sätter spelarens startposition
+	//Sätter spelarens startposition och textur
 	Player::instance()->setTexture();
 	Player::instance()->setPosY(m_heightWin - 100);
 	Player::instance()->setPosX((m_widthWin / 2) - Player::instance()->getWidth());
+
+	// Init GUI
+	GUI::instance()->init();
 
 	return true;
 }
@@ -65,26 +77,34 @@ void Game::update() {
 }
 
 void Game::render() {
+	
 	// Sätter backgrundsfärgen
 	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
 	// Clearar ut det på skärmen
 	SDL_RenderClear(m_renderer);
+	
 
 	// HÄR IMELLAN SKA ALLT RENDERAS
 	BulletHandler::instance()->draw();
 	EnemyHandler::instance()->draw();
 	Player::instance()->draw();
-	
+	GUI::instance()->draw();
+
 	// Pressenterar det till fönstret
 	SDL_RenderPresent(m_renderer);
+
+	
+
 }
 
 void Game::eventHandler() {
 	// Skapar ett event för att kunna köra ett poll event endast
 	SDL_Event event;
 	
+	// Lyssnar efter events
 	if (SDL_PollEvent(&event)) {
-	
+
+		//Kallar på spelarens eventhandler
 		Player::instance()->eventHandler(event);
 
 		switch (event.type)

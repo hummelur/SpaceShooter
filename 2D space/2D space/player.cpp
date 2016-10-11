@@ -52,6 +52,10 @@ void Player::setTexture() {
 	SDL_FreeSurface(surface);
 }
 
+void Player::givePoints(int points) {
+	_points += points;
+}
+
 Vector2D Player::getPos() const {
 	return _pos;
 }

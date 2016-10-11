@@ -27,9 +27,10 @@ public:
 	void setWidth(int width);
 	void setHeight(int height);
 	void setTexture();
+	void givePoints(int points);
 	inline int getWidth() const { return _width; }
 	inline int getHeight() const { return _height; }
-	
+	inline int getPoints() const { return _points; };
 	// Timer
 	bool timer();
 
@@ -38,6 +39,7 @@ private:
 	int _height = 50;
 	int _dir = 1;
 	int _speed = 5;
+	int _points = 0;
 
 	Vector2D _pos;
 

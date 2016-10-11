@@ -3,6 +3,8 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
+#include "GUI.h"
 #include "player.h"
 #include "BulletHandler.h"
 #include "CollisionHandler.h"
@@ -38,6 +40,7 @@ private:
 
 	SDL_Window *m_window;
 	SDL_Renderer *m_renderer;
+	SDL_Surface *m_screen;
 
 	static Game * sm_instance;
 };
