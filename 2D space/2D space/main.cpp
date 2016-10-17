@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include "GameState.h"
 int main(int argc, char* args[]) {
 
 	Game::instance()->init("Space Invaders ala Olltard", 600, 800); // Skapar fönstret
@@ -8,6 +8,5 @@ int main(int argc, char* args[]) {
 		Game::instance()->update(); // Uppdaterar allt
 		Game::instance()->render(); // renderar allt
 	}
-
 	return 0;
 }

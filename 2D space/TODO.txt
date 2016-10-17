@@ -1,0 +1,27 @@
+#TODO
+x	1. Fienden skall skjuta 
+x		-Förmodligen måste jag göra en timerklass
+x		-Behövs för att få en spelares position
+x		-Bör fixa ny textur för enemy bullets
+x	2. Spelarens skott skall vara tre stycken
+x		-Ska ordna ny textur för spelarens skott som är rund så de ser bra ut i alla riktingar
+P	3. Kommentera koden mer
+?	4. Kolla upp polymorfismen
+?	5. Fixa lite arv för Handlers
+x	6. Animation innan object tas bort (Enemy)
+x	7. Kollision mellan spelare och enemy
+x		-Fixa spelarens health också
+x		-Kollision mellan spelare och powerup också
+x	8. Gör en powerup som spawnas ibland så man får trippelskott
+x		-Gör en timer för hur länge det varar också!
+x	9. Gör om timern på player och spawnadet 
+?	10. fixa hardkodningen i powerups
+x		-Fixa så de går från sida till sida
+x	11. Gör så powerup spawnas sagta
+x	12. GameStates
+
+
+	P = Progress made
+	x = DONE
+	? = Göra sist
+

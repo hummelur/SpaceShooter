@@ -14,21 +14,24 @@ public:
 	static Bullet * instance();
 
 	Bullet();
-	Bullet(const Vector2D pos);
+	Bullet(const Vector2D pos, bool right, bool left);
 	virtual ~Bullet();
 	virtual Vector2D getPos() const;
 	virtual void draw() const;
 	virtual void update();
 	virtual int getWidth() const;
 	virtual int getHeight() const;
-
 private:
 	Vector2D _pos;
 	float _posx;
 	float _posy;
 	int _speed;
+	int _sideSpeed;
 	int _width = 20;
 	int _height = 20;
+
+	bool _leftBullet;
+	bool _rightBullet;
 
 	SDL_Texture *_texture;
 

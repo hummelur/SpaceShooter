@@ -5,13 +5,13 @@ Enemy::Enemy(float posx) :
 	_pos(posx, -30), // Kör random x position
 	_width(45),
 	_height(45),
-	_speed(3){
+	_speed(3),
+	_health(2){
+
+	_timer = new Timer(Random::instance()->getRandom(40, 100));
+	_timer->start(); // startar timern
+
 	auto surface = IMG_Load("images/enemy.png");
-
-	if (!surface) {
-		printf(IMG_GetError());
-	}
-
 	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
 
 	if (!_texture) {
@@ -26,6 +26,13 @@ Enemy::~Enemy() {
 }
 
 void Enemy::update() {
+	// Kollar om timern körs
+	if (!_timer->isOver()) {
+		_timer->isRunning(); // Kör timern
+	} else {
+		EnemyHandler::instance()->addEnemyBullet(new EnemyBullet(_pos));
+		_timer->start();
+	}
 	movement();
 }
 
@@ -51,6 +58,8 @@ Vector2D Enemy::getPos() const {
 	return _pos;
 }
 
+
 void Enemy::movement(){
 	_pos.y += _speed;
 }
+

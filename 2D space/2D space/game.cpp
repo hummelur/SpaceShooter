@@ -63,38 +63,45 @@ bool Game::init(const char* title, int w, int h) {
 	// Init GUI
 	GUI::instance()->init();
 
+
 	return true;
 }
 
 void Game::update() {
-	// Uppdaterar spelaren
-	Player::instance()->update();
-	BulletHandler::instance()->update();
-	EnemyHandler::instance()->update();
+	if (GameState::instance()->getGameState() == "Game") {
+		// Uppdaterar spelaren
+		Player::instance()->update();
+		BulletHandler::instance()->update();
+		EnemyHandler::instance()->update();
+		PowerupHandler::instance()->update();
+		ExplotionManager::instance()->update();
+		CollisionHandler::instance()->CheckObjCollision();
+	}
 
 	// Kör eventhandlern
 	eventHandler();
 }
 
 void Game::render() {
-	
 	// Sätter backgrundsfärgen
 	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
 	// Clearar ut det på skärmen
 	SDL_RenderClear(m_renderer);
 	
-
-	// HÄR IMELLAN SKA ALLT RENDERAS
-	BulletHandler::instance()->draw();
-	EnemyHandler::instance()->draw();
-	Player::instance()->draw();
-	GUI::instance()->draw();
+	if (GameState::instance()->getGameState() == "Game") {
+		// HÄR IMELLAN SKA ALLT RENDERAS
+		BulletHandler::instance()->draw();
+		EnemyHandler::instance()->draw();
+		PowerupHandler::instance()->draw();
+		Player::instance()->draw();
+		ExplotionManager::instance()->draw();
+		GUI::instance()->draw();
+	} else {
+		GUI::instance()->draw();
+	}
 
 	// Pressenterar det till fönstret
 	SDL_RenderPresent(m_renderer);
-
-	
-
 }
 
 void Game::eventHandler() {
@@ -103,10 +110,12 @@ void Game::eventHandler() {
 	
 	// Lyssnar efter events
 	if (SDL_PollEvent(&event)) {
-
-		//Kallar på spelarens eventhandler
-		Player::instance()->eventHandler(event);
-
+		// Om gamestate är game så körs detta
+		if (GameState::instance()->getGameState() == "Game") {
+			//Kallar på spelarens eventhandler
+			Player::instance()->eventHandler(event);
+		}
+		//Lyssnar efter events
 		switch (event.type)
 		{
 			case SDL_QUIT:
@@ -114,13 +123,23 @@ void Game::eventHandler() {
 				break;
 			default:
 				break;
-		}
-		switch (event.key.keysym.sym) {
-		case SDLK_ESCAPE:
-			m_running = false;
-			break;
-		default:
-			break;
+		} 
+		if (GameState::instance()->getGameState() != "Game" && GameState::instance()->getGameState() != "Gameover") {
+			switch (event.key.keysym.sym) {
+				case SDLK_SPACE:
+					GameState::instance()->setGameState("Game");
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (event.key.keysym.sym) {
+				case SDLK_ESCAPE:
+					m_running = false;
+					break;
+				default:
+					break;
+			}
 		}
 	}	
 }

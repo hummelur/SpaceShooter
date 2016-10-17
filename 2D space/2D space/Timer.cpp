@@ -1,20 +1,54 @@
 #include "Timer.h"
 
-Timer * Timer::sm_instance = new Timer();
+// initerar timern
+Timer::Timer(int stime){
+	_reseted = true;
+	_running = false;
+	_beg = stime;
+	_end = stime;
+	start();
+}
 
-Timer::Timer(){ }
+// Startar timern
+void Timer::start() {
+	_running = true;
+}
 
-Timer::~Timer(){}
+// Stoppar och ställer om timern
+void Timer::stop() {
+	_beg = _end;
+	_running = false;
+}
 
-bool Timer::Timr(int timeDown) {
-	timeDown -= 10;
+// Ställer tillbaka timern
+void Timer::reset() {
+	_reseted = true;
+	_beg = _end;
+	start();
+}
 
-	if (timeDown <= 0) {
-		return true;
-	} else {
+// Körs för varje update
+bool Timer::isRunning() {
+	if (!_running) {
 		return false;
+	} else if(_beg >= 0) {
+		_beg--;
+		_running = true;
+	} else {
+		isOver();
+		stop();
 	}
 }
-Timer * Timer::instance() {
-	return sm_instance;
+
+// Returnerar tiden som har gått
+int Timer::getTime() {
+	return _beg;
+}
+
+// Sätter att det är slut
+bool Timer::isOver() {
+	if (!_running)
+		return true;
+	else
+		return false;
 }

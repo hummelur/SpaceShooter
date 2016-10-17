@@ -6,21 +6,19 @@ Bullet * Bullet::sm_instance = new Bullet();
 
 Bullet::Bullet(){}
 
-Bullet::Bullet(const Vector2D pos) :
-	_width(40),
+Bullet::Bullet(const Vector2D pos, bool right, bool left) :
+	_width(20),
 	_pos(pos),
 	_speed(14),
-	_height(40) {
+	_sideSpeed(4),
+	_height(20),
+	_leftBullet(right),
+	_rightBullet(left){
 	_pos.x = _pos.x + (Player::instance()->getWidth() / 2) - (_width / 2);
 	
 	// Laddar in bilden 
 	// (Kanske ska ändra detta så man bara laddar in bilden en gång istället för många gånger)
-	auto surface = IMG_Load("images/bullet.png");
-	
-	// Kollar om de gick att ladda filen
-	if (!surface) {
-		printf(IMG_GetError());
-	}
+	auto surface = IMG_Load("images/pbullet.png");
 
 	// Lägger in bilden till texturen 
 	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
@@ -68,6 +66,11 @@ void Bullet::draw() const {
 
 void Bullet::update() {
 	_pos.y -= _speed;
+	if (_rightBullet) {
+		_pos.x += _sideSpeed;
+	} else if (_leftBullet) {
+		_pos.x -= _sideSpeed;
+	}
 }
 
 int Bullet::getHeight() const {

@@ -1,15 +1,20 @@
 #ifndef INCLUDED_GAME
 #define INCLUDED_GAME
 
+
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
 #include "GUI.h"
 #include "player.h"
+#include "PowerupHandler.h"
 #include "BulletHandler.h"
 #include "CollisionHandler.h"
+#include "ExplotionManager.h"
 #include "Bullet.h"
 #include "EnemyHandler.h"
+#include "GameState.h"
+
 
 class Game {
 public:
@@ -41,6 +46,8 @@ private:
 	SDL_Window *m_window;
 	SDL_Renderer *m_renderer;
 	SDL_Surface *m_screen;
+
+	GameState *_gameState;
 
 	static Game * sm_instance;
 };

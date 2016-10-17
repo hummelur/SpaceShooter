@@ -20,7 +20,7 @@ public:
 	void delBullet();
 	void draw();
 	void update();
-	void collisionHandlerBullet(std::vector<GameObject*> &enemys);
+	void reset();
 
 	typedef std::vector<GameObject*> bullets;
 	bullets m_bullets;

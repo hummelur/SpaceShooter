@@ -8,10 +8,13 @@ Player * Player::sm_instance = new Player();
 Player::Player() :
 	_posx(100),
 	_posy(500),
-	_pos(_posx, _posy){
+	_pos(_posx, _posy),
+	_lives(175),
+	_powerup(false){
 	_speed = 6;
 	keyStates = SDL_GetKeyboardState(0);
 
+	_timer = new Timer(400);
 }
 
 Player::~Player() {
@@ -37,12 +40,13 @@ void Player::setHeight(int height) {
 	_height = height;
 }
 
+void Player::setHealth(int hp) {
+	_lives -= hp;
+	
+}
+
 void Player::setTexture() {
 	auto surface = IMG_Load("images/player.png");
-
-	if (!surface) {
-		printf(IMG_GetError());
-	}
 
 	_texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
 
@@ -50,6 +54,11 @@ void Player::setTexture() {
 		printf("Failed to create texture");
 	}
 	SDL_FreeSurface(surface);
+}
+
+void Player::setPowerup(bool condision) {
+	_powerup = condision;
+	_timer->start();
 }
 
 void Player::givePoints(int points) {
@@ -76,6 +85,15 @@ void Player::movement( int speed, int dir ) {
 
 void Player::update() {
 	
+	if (_powerup) {
+		if (!_timer->isOver()) {
+			_timer->isRunning();
+		} else {
+			_powerup = false;
+			_timer->stop();
+		}
+	}
+
 	// Timer
 	if (_timerunning == true) {
 		// Om klassen retunerar true så ställs 
@@ -108,9 +126,20 @@ void Player::update() {
 	}
 	if (_fireing) {
 		if (_timerunning == false) {
-			BulletHandler::instance()->addBullet(new Bullet(_pos));
+			if (_powerup) {
+				BulletHandler::instance()->addBullet(new Bullet(_pos, true, false));  // Går höger
+				BulletHandler::instance()->addBullet(new Bullet(_pos, false, false)); // Går rakt
+				BulletHandler::instance()->addBullet(new Bullet(_pos, false, true));  // Går vänster
+			} else {
+				BulletHandler::instance()->addBullet(new Bullet(_pos, false, false)); // Går rakt
+			}
+			
 			_timerunning = true;
 		}
+	}
+
+	if (_lives <= 0) {
+		GameState::instance()->setGameState("Gameover");
 	}
 }
 
@@ -197,4 +226,11 @@ bool Player::timer() {
 		return false;
 	}
 	
+}
+
+int Player::getPowerUpTime() const {
+	if (_powerup)
+		return _timer->getTime();
+	else
+		return 0;
 }
